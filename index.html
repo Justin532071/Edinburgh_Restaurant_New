@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="utf-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Edinburgh Food Finder&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Lusitana:wght@400;700&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { margin: 0; padding: 0; font-family: 'Lusitana', serif; color: #333; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#map { position: absolute; top: 0; bottom: 0; width: 100%; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#console { position: absolute; width: 300px; margin: 10px; padding: 15px; background: white; z-index: 1; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>h1 { font-family: 'DM Serif Display', serif; font-size: 20px; margin: 0 0 10px 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.category-group { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 10px; max-height: 200px; overflow-y: auto; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.radio-container { display: flex; align-items: center; font-size: 13px; cursor: pointer; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.side-panel { position: fixed; right: 0; top: 0; width: 0; height: 100%; background: white; z-index: 3; transition: 0.4s; overflow-x: hidden; box-shadow: -2px 0 10px rgba(0,0,0,0.1); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#side-info { padding: 50px 25px; width: 300px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.close-btn { position: absolute; top: 10px; right: 20px; font-size: 30px; cursor: pointer; border: none; background: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.google-btn { display: block; text-align: center; background: #333; color: white; padding: 10px; text-decoration: none; border-radius: 4px; margin-top: 20px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id='console'&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Edinburgh Food Finder&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id='filters'&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="radio-container"&gt;&lt;input type="radio" name="toggle" value="all" checked&gt;&lt;span&gt;All Cuisines&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="category-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="radio-container"&gt;&lt;input type="radio" name="toggle" value="indian"&gt;&lt;span&gt;Indian&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="radio-container"&gt;&lt;input type="radio" name="toggle" value="chinese"&gt;&lt;span&gt;Chinese&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="radio-container"&gt;&lt;input type="radio" name="toggle" value="italian"&gt;&lt;span&gt;Italian&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="radio-container"&gt;&lt;input type="radio" name="toggle" value="scottish"&gt;&lt;span&gt;Scottish&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="radio-container"&gt;&lt;input type="radio" name="toggle" value="spanish"&gt;&lt;span&gt;Spanish&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="radio-container"&gt;&lt;input type="radio" name="toggle" value="mexican"&gt;&lt;span&gt;Mexican&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="radio-container"&gt;&lt;input type="radio" name="toggle" value="thai"&gt;&lt;span&gt;Thai&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="radio-container"&gt;&lt;input type="radio" name="toggle" value="japanese"&gt;&lt;span&gt;Japanese&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="radio-container"&gt;&lt;input type="radio" name="toggle" value="seafood"&gt;&lt;span&gt;Seafood&lt;/span&gt;&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="side-panel" class="side-panel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="close-btn" onclick="closeSidebar()"&gt;×&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="side-info"&gt;Select a restaurant on the map.&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="map"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>mapboxgl.accessToken = 'pk.eyJ1IjoianVzdGluNTMyMDcxIiwiYSI6ImNta2NtMG1ocjAybGwzZHNjd3hvNzBmZGQifQ.bH5dRPSXtcdVHhO0BKiwdQ';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const map = new mapboxgl.Map({</p>
+<p class="p1"><span class="Apple-converted-space">        </span>container: 'map',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>style: 'mapbox://styles/mapbox/light-v11',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>center: [-3.1883, 55.9533],</p>
+<p class="p1"><span class="Apple-converted-space">        </span>zoom: 13,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>maxBounds: [[-3.32, 55.89], [-3.05, 55.99]]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const foodLayerId = "edinburgh-layer";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function closeSidebar() { document.getElementById('side-panel').style.width = "0"; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>map.on('load', () =&gt; {</p>
+</body>
+</html>
